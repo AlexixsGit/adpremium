@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.azure.adpremium.security.SecurityFilter;
+import com.azure.adpremium.security.AzureADAuthentication;
 
 @RestController
 public class MainController {
@@ -20,7 +20,6 @@ public class MainController {
 	public void authenticate(HttpServletRequest request)
 			throws MalformedURLException, ServiceUnavailableException, InterruptedException, ExecutionException {
 		System.out.println("authenticating");
-		SecurityFilter filter = new SecurityFilter();
-		filter.doFilterInternal(request);
+		AzureADAuthentication.aadAuthentication(request);
 	}
 }

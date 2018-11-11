@@ -15,7 +15,7 @@ import com.microsoft.aad.adal4j.AuthenticationResult;
 import com.microsoft.aad.adal4j.ClientCredential;
 import com.microsoft.aad.adal4j.UserAssertion;
 
-public class SecurityFilter {
+public class AzureADAuthentication {
 
 	private static final String CURRENT_USER_PRINCIPAL = "CURRENT_USER_PRINCIPAL";
 	private static final String CURRENT_USER_PRINCIPAL_GRAPHAPI_TOKEN = "CURRENT_USER_PRINCIPAL_GRAPHAPI_TOKEN";
@@ -27,7 +27,7 @@ public class SecurityFilter {
 	private static final String CLIENT_ID = "e752e97f-5840-4f7d-91d4-f30723e127e8";
 	private static final String CLIENT_SECRET = "7QQMVAB/Q/e3S/G50TEMmSO5LcNV1y+R2rwSx6wj54s=";
 
-	public void doFilterInternal(HttpServletRequest request)
+	public static void aadAuthentication(HttpServletRequest request)
 			throws MalformedURLException, ServiceUnavailableException, InterruptedException, ExecutionException {
 
 		final String authHeader = request.getHeader(TOKEN_HEADER);
@@ -49,7 +49,7 @@ public class SecurityFilter {
 
 	}
 
-	public AuthenticationResult acquireTokenForGraphApi(String idToken, String tenantId)
+	private static AuthenticationResult acquireTokenForGraphApi(String idToken, String tenantId)
 			throws MalformedURLException, ServiceUnavailableException, InterruptedException, ExecutionException {
 
 		final ClientCredential credential = new ClientCredential(CLIENT_ID, CLIENT_SECRET);
